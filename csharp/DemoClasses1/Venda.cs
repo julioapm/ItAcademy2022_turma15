@@ -9,6 +9,11 @@ public class Venda
         itens.Add(new ItemDeVenda(umProduto,umaQuantidade));
     }
 
+    public void AdicionarItem(Produto umProduto)
+    {
+        AdicionarItem(umProduto,1);
+    }
+
     public decimal Total
     {
         get

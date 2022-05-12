@@ -9,6 +9,10 @@ public class Pessoa
         idade = umaIdade;
     }
 
+    public Pessoa(string umNome) : this(umNome,0)
+    {
+    }
+
     public string Nome => nome;
     /*
     public string Nome
