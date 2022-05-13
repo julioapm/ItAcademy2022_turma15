@@ -1,0 +1,11 @@
+﻿Retangulo r1 = new Retangulo(2,5,10,23);
+Retangulo r2 = new Retangulo(2,5,10,23);
+Console.WriteLine(r1);
+Console.WriteLine(r2);
+Console.WriteLine(r1.Equals(r2));
+Console.WriteLine(r1.Area);
+Quadrado q1 = new Quadrado(1,1,5);
+Console.WriteLine(q1);
+Console.WriteLine(q1.Area);
+Retangulo r3 = new Quadrado(0,0,1);
+FiguraGeometrica f1 = r1;
