@@ -5,8 +5,8 @@ public class Retangulo : FiguraGeometrica
     public int Altura {get;set;}
     public int Largura {get;set;}
     
-    public Retangulo(int x, int y, int altura, int largura)
-    : base(x,y)
+    public Retangulo(int x, int y, int altura, int largura, string id)
+    : base(x,y,id)
     {
         if (altura <= 0)
         {
