@@ -40,4 +40,14 @@ public class AloMundoController : ControllerBase
         _logger.LogInformation("POST /api/v1/alomundo");
         return $"Alô, {nome}!";
     }
+
+    [HttpPost("pessoa")] //POST .../api/v1/alomundo/pessoa
+    public string Post([FromBody] Pessoa pessoa)
+    {
+        _logger.LogInformation("POST /api/v1/alomundo/pessoa");
+        _logger.LogInformation($"Nome={pessoa.Nome}");
+        _logger.LogInformation($"Email={pessoa.Email}");
+        _logger.LogInformation($"Idade={pessoa.Idade}");
+        return $"Alô, {pessoa.Nome}!";
+    }
 }
