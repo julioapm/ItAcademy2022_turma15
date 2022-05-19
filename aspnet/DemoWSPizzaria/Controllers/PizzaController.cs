@@ -46,4 +46,7 @@ public class PizzaController : ControllerBase
         PizzasServices.Delete(id);
         return NoContent();
     }
+
+    [HttpGet("excecao")] //.../pizza/excecao
+    public IActionResult GeraExcecao() => throw new Exception("Ocorreu alguma falaha");
 }
