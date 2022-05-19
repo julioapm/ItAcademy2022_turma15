@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWSPizzaria.Controllers;
@@ -13,12 +14,14 @@ public class PizzaController : ControllerBase
         _logger = logger;
     }
 
+    [EnableCors("PermiteTudo")]
     [HttpGet()] //.../pizza
     public IEnumerable<Pizza> GetAll()
     {
         return PizzasServices.GetAll();
     }
 
+    [EnableCors("PermiteTudo")]
     [HttpGet("{id}")] //.../pizza/1
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
