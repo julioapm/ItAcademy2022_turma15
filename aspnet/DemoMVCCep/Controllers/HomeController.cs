@@ -1,21 +1,36 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using DemoMVCCep.Models;
+using DemoMVCCep.Services;
 
 namespace DemoMVCCep.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ICepService _cepservice;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ICepService cepService)
     {
         _logger = logger;
+        _cepservice = cepService;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var ceps = _cepservice.ConsultaTodos();
+        return View(ceps);
+    }
+
+    public IActionResult Search(string id)
+    {
+        ViewData["Id"] = id;
+        ConsultaCep? resultado = null;
+        if (!String.IsNullOrEmpty(id))
+        {
+            resultado = _cepservice.ConsultaPorCep(id);
+        }
+        return View(resultado);
     }
 
     public IActionResult Privacy()

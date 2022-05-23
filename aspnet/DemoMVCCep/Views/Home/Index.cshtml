@@ -1,8 +1,31 @@
-﻿@{
+﻿@model IEnumerable<DemoMVCCep.Models.ConsultaCep>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Todos CEPs:</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>CEP</th>
+            <th>Logradouro</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>UF</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Cep)</td>
+            <td>@item.Logradouro</td>
+            <td>@item.Bairro</td>
+            <td>@item.Cidade</td>
+            <td>@item.Estado</td>
+        </tr>
+    }
+    </tbody>
+</table>
