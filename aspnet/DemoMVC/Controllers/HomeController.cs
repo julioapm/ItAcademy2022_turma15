@@ -13,6 +13,11 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    public string AloMundo(string name) //.../Home/AloMundo?name=Julio
+    {
+        return $"Alô, {name}";
+    }
+
     public IActionResult Index()
     {
         return View();
