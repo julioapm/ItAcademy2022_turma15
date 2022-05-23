@@ -33,6 +33,23 @@ public class HomeController : Controller
         return View(resultado);
     }
 
+    public IActionResult Create() //GET .../Home/Create
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create([Bind("Cep,Logradouro,Bairro,Cidade,Estado")]ConsultaCep novoCep) //POST .../Home/Create
+    {
+        if (ModelState.IsValid)
+        {
+            _cepservice.Cadastrar(novoCep);
+            return RedirectToAction(nameof(Index));
+        }
+        return View(novoCep);
+    }
+
     public IActionResult Privacy()
     {
         return View();
