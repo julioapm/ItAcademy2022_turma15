@@ -4,6 +4,7 @@ using DemoEFCoreWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoEFCoreWebApi.Migrations
 {
     [DbContext(typeof(LojinhaContext))]
-    partial class LojinhaContextModelSnapshot : ModelSnapshot
+    [Migration("20220527194201_AdicaoPedidoCliente")]
+    partial class AdicaoPedidoCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,24 +48,6 @@ namespace DemoEFCoreWebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("DemoEFCoreWebApi.Models.Item", b =>
-                {
-                    b.Property<int>("PedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("int");
-
-                    b.HasKey("PedidoId", "ProdutoId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("DemoEFCoreWebApi.Models.Pedido", b =>
@@ -112,25 +96,6 @@ namespace DemoEFCoreWebApi.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("DemoEFCoreWebApi.Models.Item", b =>
-                {
-                    b.HasOne("DemoEFCoreWebApi.Models.Pedido", "Pedido")
-                        .WithMany("Itens")
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoEFCoreWebApi.Models.Produto", "Produto")
-                        .WithMany("Itens")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pedido");
-
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("DemoEFCoreWebApi.Models.Pedido", b =>
                 {
                     b.HasOne("DemoEFCoreWebApi.Models.Cliente", "Cliente")
@@ -145,16 +110,6 @@ namespace DemoEFCoreWebApi.Migrations
             modelBuilder.Entity("DemoEFCoreWebApi.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("DemoEFCoreWebApi.Models.Pedido", b =>
-                {
-                    b.Navigation("Itens");
-                });
-
-            modelBuilder.Entity("DemoEFCoreWebApi.Models.Produto", b =>
-                {
-                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }
