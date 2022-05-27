@@ -11,4 +11,14 @@ public class LojinhaContext: DbContext
     : base(options)
     {
     }
+    public DbSet<Produto> Produtos {get;set;} = null!;
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Produto>(entityBuilder => {
+            entityBuilder.Property(e => e.Nome)
+                .HasMaxLength(30);
+            entityBuilder.Property(e => e.Descricao)
+                .HasMaxLength(200);
+        });
+    }
 }
