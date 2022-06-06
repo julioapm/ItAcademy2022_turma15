@@ -22,6 +22,20 @@ public class PedidosController : ControllerBase
         _clientesRepositorio = clientesRepositorio;
     }
 
+    //GET .../pedidos/{id}
+    [HttpGet("{id}")]
+    public async Task<ActionResult<PedidoDTO>> GetPedido(int id)
+    {
+        var pedido = await _pedidosRepositorio.ConsultarAsync(id);
+        if (pedido is null)
+        {
+            return NotFound();
+        }
+        return PedidoDTO.FromPedido(pedido);
+    }
+
+    //GET .../pedidos?cliente={id}
+
     //POST .../pedidos
     [HttpPost]
     public async Task<ActionResult<PedidoDTO>> PostCarrinho(CarrinhoDTO carrinho)

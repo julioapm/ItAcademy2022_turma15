@@ -15,4 +15,27 @@ public class PedidoRepositorioEF : IPedidoRepositorio
         await _contexto.SaveChangesAsync();
         return pedido;
     }
+
+    public async Task<Pedido?> ConsultarAsync(int id)
+    {
+        //Eager loading
+        var pedido = await _contexto.Pedidos
+                        .Where(p => p.Id == id)
+                        .Include(p => p.Cliente)
+                        .Include(p => p.Itens)
+                        .ThenInclude(i => i.Produto)
+                        .FirstOrDefaultAsync();
+        
+        //Explicit loading
+        /*
+        var pedido = await _contexto.Pedidos.FindAsync(id);
+        if (pedido is not null)
+        {
+            await _contexto.Entry(pedido).Reference(p => p.Cliente).LoadAsync();
+            await _contexto.Entry(pedido).Collection(p => p.Itens).LoadAsync();
+            //...
+        }
+        */
+        return pedido;
+    }
 }
